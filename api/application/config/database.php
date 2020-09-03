@@ -77,9 +77,9 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 
-	// 'username' => 'root',  //eecshopp_tomato
-	// 'password' => '',    //jh@WtmL9P,x=
-	// 'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
+	'username' => 'root',  //eecshopp_tomato
+	'password' => '',    //jh@WtmL9P,x=
+	'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
 
     'username' => 'cabelsof_cabelsoft',  //eecshopp_tomato
 	'password' => 'Passw0rd55.,',    //jh@WtmL9P,x=

@@ -34,9 +34,10 @@ class ProductController extends API_Controller{
 		$json_request_body = file_get_contents('php://input');
 		$data = json_decode($json_request_body, true);
 
-		if(isset($data['search_keyword']) && isset($data['page_count'])){
+		if(isset($data['search_keyword']) && isset($data['page_count']) && isset($data['page_limits'])){
 			$search_keyword = $data['search_keyword'];
 			$page_count = $data['page_count'];
+			$page_limits = $data['page_limits'];
 
 			if($page_count==''){
 				$response_array = array(
@@ -50,8 +51,8 @@ class ProductController extends API_Controller{
 				->set_output(json_encode($response_array));
 			}
 			else{
-				$page_count = ($page_count * 10);
-				$result_query = $this->ProductModel->getAllProductDetails($search_keyword,$page_count);
+				$page_count = ($page_count * $page_limits);
+				$result_query = $this->ProductModel->getAllProductDetails($search_keyword,$page_count,$page_limits);
 			//print_r($result_query);
 				$resultSet = Array();
 				if($result_query)
