@@ -168,6 +168,7 @@ public function getAllCustomerData(){
   $this->load->model('CustomerModel');
   $json_request_body = file_get_contents('php://input');
   $data = json_decode($json_request_body, true);
+  $resultSet = Array();
 
   if(isset($data['search_keyword']) && isset($data['page_count']) && isset($data['page_limits'])){
     $search_keyword = $data['search_keyword'];
@@ -179,6 +180,7 @@ public function getAllCustomerData(){
         'code' => HTTP_201,
         'isSuccess' => false,
         'message' => NEED_PAGE_COUNT,
+        'customer_details' => $resultSet
       );
       $this->output
       ->set_content_type('application/json')
@@ -189,7 +191,7 @@ public function getAllCustomerData(){
       $page_count = ($page_count * $page_limits);
       $result_query = $this->CustomerModel->getAllCustomerData($search_keyword,$page_count,$page_limits);
       //print_r($result_query);
-      $resultSet = Array();
+      
       if($result_query)
       {
         foreach ($result_query as $customer_result) 
@@ -209,7 +211,7 @@ public function getAllCustomerData(){
           'code' => HTTP_200,
           'isSuccess' => true,
           'message' => CUSTOMER_RECEIVED,
-          'product_details' => $resultSet
+          'customer_details' => $resultSet
         );
         $this->output
         ->set_content_type('application/json')
@@ -221,7 +223,7 @@ public function getAllCustomerData(){
           'code' => HTTP_201,
           'isSuccess' => false,
           'message' => NEED_SEARCH_RESULT,
-          'product_details' => $resultSet
+          'customer_details' => $resultSet
         );
         $this->output
         ->set_content_type('application/json')
@@ -234,7 +236,8 @@ public function getAllCustomerData(){
     $response_array = array(
       'code' => HTTP_201,
       'isSuccess' => false,
-      'message' => NEED_ALL_PARAMS
+      'message' => NEED_ALL_PARAMS,
+      'customer_details' => $resultSet
     );
     $this->output
     ->set_content_type('application/json')

@@ -45,7 +45,7 @@ class ProductController extends API_Controller{
 					'code' => HTTP_201,
 					'isSuccess' => false,
 					'message' => NEED_PAGE_COUNT,
-					'customer_details' => $resultSet
+					'product_details' => $resultSet
 				);
 				$this->output
 				->set_content_type('application/json')
@@ -75,7 +75,7 @@ class ProductController extends API_Controller{
 						'code' => HTTP_200,
 						'isSuccess' => true,
 						'message' => PRODUCT_RECEIVED,
-						'customer_details' => $resultSet
+						'product_details' => $resultSet
 					);
 					$this->output
 					->set_content_type('application/json')
@@ -87,7 +87,7 @@ class ProductController extends API_Controller{
 						'code' => HTTP_201,
 						'isSuccess' => false,
 						'message' => NEED_SEARCH_RESULT,
-						'customer_details' => $resultSet
+						'product_details' => $resultSet
 					);
 					$this->output
 					->set_content_type('application/json')
@@ -101,7 +101,8 @@ class ProductController extends API_Controller{
 				'code' => HTTP_201,
 				'isSuccess' => false,
 				'message' => NEED_ALL_PARAMS,
-				'customer_details' => $resultSet
+				'product_details' => $resultSet
+
 			);
 			$this->output
 			->set_content_type('application/json')
