@@ -43,7 +43,7 @@ class ProductController extends API_Controller{
 				$response_array = array(
 					'code' => HTTP_201,
 					'isSuccess' => false,
-					'message' => "Page Count must be not empty",
+					'message' => NEED_PAGE_COUNT,
 				);
 				$this->output
 				->set_content_type('application/json')
@@ -72,7 +72,7 @@ class ProductController extends API_Controller{
 					$response_array = array(
 						'code' => HTTP_200,
 						'isSuccess' => true,
-						'message' => "Product Details Received Successfully",
+						'message' => PRODUCT_RECEIVED,
 						'product_details' => $resultSet
 					);
 					$this->output
@@ -84,7 +84,7 @@ class ProductController extends API_Controller{
 					$response_array = array(
 						'code' => HTTP_201,
 						'isSuccess' => false,
-						'message' => "Searched product result not found.",
+						'message' => NEED_SEARCH_RESULT,
 						'product_details' => $resultSet
 					);
 					$this->output

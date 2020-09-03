@@ -75,6 +75,15 @@ class CustomerModel extends CI_Model{
 	}
 
 
+	public function getAllCustomerData($data,$pagecount,$pagelimits){
+		$this->db->select('*');
+		$this->db->from('customer_master');
+		$this->db->like('customer_name',$data, 'after');
+		$this->db->limit($pagelimits,$pagecount); 
+		$query_result=$this->db->get();
+		return $query_result->result_array();
+	} 
+
 
 
 }?>

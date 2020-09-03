@@ -100,3 +100,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 ///customer 
 $route['json/addNewCustomer'] = 'CustomerController/addCustomerData';
+$route['json/getAllCustomer'] = 'CustomerController/getAllCustomerData';

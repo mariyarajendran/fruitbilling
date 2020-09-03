@@ -109,7 +109,11 @@ define('ENTER_PRODUCT_PRICE', 'Enter Product price');
 define('ENTER_PRODUCT_NAME', 'Enter Product name');
 define('WRONG_FOR_ADD_PRODUCT', 'Something Wrong in Add Product');
 define('NEW_PRODUCT_ADDED', 'New Product Added Successfully');
+define('PRODUCT_RECEIVED', 'Product Details Received Successfully');
+define('CUSTOMER_RECEIVED', 'Customer Details Received Successfully');
 
 
 define('NEED_ALL_PARAMS', 'Please give all request params');
+define('NEED_PAGE_COUNT', 'Page Count must be not empty');
+define('NEED_SEARCH_RESULT', 'Searched result not found.');
 
