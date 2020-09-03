@@ -96,3 +96,7 @@ $route['json/upload'] = 'CredentialController/do_upload';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+///customer 
+$route['json/addNewCustomer'] = 'CustomerController/addCustomerData';
