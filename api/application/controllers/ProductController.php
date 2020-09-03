@@ -71,7 +71,7 @@ class ProductController extends API_Controller{
 
 					$response_array = array(
 						'code' => HTTP_200,
-						'isSuccess' => false,
+						'isSuccess' => true,
 						'message' => "Product Details Received Successfully",
 						'product_details' => $resultSet
 					);
