@@ -97,7 +97,7 @@ class ProductController extends API_Controller{
 			$response_array = array(
 				'code' => HTTP_201,
 				'isSuccess' => false,
-				'message' => "Please give all request params"
+				'message' => NEED_ALL_PARAMS
 			);
 			$this->output
 			->set_content_type('application/json')

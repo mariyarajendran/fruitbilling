@@ -56,7 +56,7 @@ class AdminAddProductController extends API_Controller{
     $response_array = array(
      'code' => HTTP_201,
      'isSuccess' => false,
-     'message' => "Enter Productname",
+     'message' => ENTER_PRODUCT_NAME,
    );
     $this->output
     ->set_content_type('application/json')
@@ -67,7 +67,7 @@ class AdminAddProductController extends API_Controller{
     $response_array = array(
      'code' => HTTP_201,
      'isSuccess' => false,
-     'message' => "Enter Product Cost",
+     'message' => ENTER_PRODUCT_PRICE,
    );
     $this->output
     ->set_content_type('application/json')
@@ -90,7 +90,7 @@ class AdminAddProductController extends API_Controller{
     $response_array = array(
       'code' => HTTP_201,
       'isSuccess' => false,
-      'message' => "Enter Product Stock",
+      'message' => ENTER_PRODUCT_STOCK,
     );
     $this->output
     ->set_content_type('application/json')
@@ -101,7 +101,7 @@ class AdminAddProductController extends API_Controller{
     $response_array = array(
       'code' => HTTP_201,
       'isSuccess' => false,
-      'message' => "Enter Product Code",
+      'message' => ENTER_PRODUCT_CODE,
     );
     $this->output
     ->set_content_type('application/json')
@@ -146,7 +146,7 @@ class AdminAddProductController extends API_Controller{
   $response_array = array(
    'code' => HTTP_200,
    'isSuccess' => true,
-   'message' => "New Product Added Successfully"
+   'message' => NEW_PRODUCT_ADDED
  );
   $this->output
   ->set_content_type('application/json')
@@ -157,7 +157,7 @@ else{
   $response_array = array(
    'code' => HTTP_201,
    'isSuccess' => false,
-   'message' => "Something Wrong in Add Product",
+   'message' => WRONG_FOR_ADD_PRODUCT,
  );
   $this->output
   ->set_content_type('application/json')
@@ -171,7 +171,7 @@ else{
   $response_array = array(
     'code' => HTTP_201,
     'isSuccess' => false,
-    'message' => "Please give all request params",
+    'message' => NEED_ALL_PARAMS,
   );
   $this->output
   ->set_content_type('application/json')

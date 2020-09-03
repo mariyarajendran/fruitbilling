@@ -83,9 +83,33 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
-define('HTTP_200', 200);
+
 define('HTTP_201', 201);
 define('HTTP_400', 400);
 define('HTTP_404', 404);
 define('HTTP_401', 401);
+
+//customer strings
+define('HTTP_200', 200);
+
+
+//////Customer
+define('ENTER_CUSTOMER_NAME', 'Enter Customername');
+define('ENTER_CUSTOMER_BILLING_NAME', 'Enter Customer billing name');
+define('ENTER_CUSTOMER_ADDRESS_NAME', 'Enter Customer address');
+define('ENTER_CUSTOMER_MOBILE_NO', 'Enter Customer mobile number');
+define('ENTER_CUSTOMER_WHATS_APP_NO', 'Enter Customer whatsapp number');
+define('WRONG_FOR_ADD_CUSTOMER', 'Something Wrong in Add Customer');
+define('NEW_CUSTOMER_ADDED', 'New Customer Added Successfully');
+
+////product
+define('ENTER_PRODUCT_CODE', 'Enter Product code');
+define('ENTER_PRODUCT_STOCK', 'Enter Product stock');
+define('ENTER_PRODUCT_PRICE', 'Enter Product price');
+define('ENTER_PRODUCT_NAME', 'Enter Product name');
+define('WRONG_FOR_ADD_PRODUCT', 'Something Wrong in Add Product');
+define('NEW_PRODUCT_ADDED', 'New Product Added Successfully');
+
+
+define('NEED_ALL_PARAMS', 'Please give all request params');
 

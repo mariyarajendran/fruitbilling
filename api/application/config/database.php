@@ -79,7 +79,7 @@ $db['default'] = array(
 
 	// 'username' => 'root',  //eecshopp_tomato
 	// 'password' => '',    //jh@WtmL9P,x=
-	// 'database' => 'justsitandorder', //eecshopp_tomato
+	// 'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
 
     'username' => 'cabelsof_cabelsoft',  //eecshopp_tomato
 	'password' => 'Passw0rd55.,',    //jh@WtmL9P,x=
