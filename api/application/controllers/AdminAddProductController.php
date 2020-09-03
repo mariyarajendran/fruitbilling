@@ -309,7 +309,7 @@ public function adminDeleteProduct(){
       if($result_query)
       {
         $response_array = array(
-          'code' => HTTP_201,
+          'code' => HTTP_200,
           'isSuccess' => true,
           'message' => "Product Deleted Successfully"
         );

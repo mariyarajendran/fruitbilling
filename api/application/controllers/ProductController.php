@@ -61,9 +61,9 @@ class ProductController extends API_Controller{
 						$resultSet[] = array(
 							"product_id" =>  $product_result['product_id'],
 							"product_name" =>  $product_result['product_name'],
-							"product_cost" =>  $product_result['product_cost'],
+							"product_cost" =>  (int) $product_result['product_cost'],
 							"product_image" =>  $product_result['product_image'],
-							"product_stock_kg" =>  $product_result['product_stock_kg'],
+							"product_stock_kg" =>  (int) $product_result['product_stock_kg'],
 							"product_code" =>  $product_result['product_code']
 						);
 					} 
