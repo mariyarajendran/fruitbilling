@@ -164,7 +164,88 @@ else{
 
 
 
+public function getAllCustomerData(){
+  $this->load->model('CustomerModel');
+  $json_request_body = file_get_contents('php://input');
+  $data = json_decode($json_request_body, true);
+  $resultSet = Array();
 
+  if(isset($data['search_keyword']) && isset($data['page_count']) && isset($data['page_limits'])){
+    $search_keyword = $data['search_keyword'];
+    $page_count = $data['page_count'];
+    $page_limits = $data['page_limits'];
+
+    if($page_count==''){
+      $response_array = array(
+        'code' => HTTP_201,
+        'isSuccess' => false,
+        'message' => NEED_PAGE_COUNT,
+        'customer_details' => $resultSet
+      );
+      $this->output
+      ->set_content_type('application/json')
+      ->set_status_header(HTTP_201)
+      ->set_output(json_encode($response_array));
+    }
+    else{
+      $page_count = ($page_count * $page_limits);
+      $result_query = $this->CustomerModel->getAllCustomerData($search_keyword,$page_count,$page_limits);
+      //print_r($result_query);
+      
+      if($result_query)
+      {
+        foreach ($result_query as $customer_result) 
+        { 
+          $resultSet[] = array(
+            "customer_id " =>  $customer_result['customer_id'],
+            "customer_name" =>  $customer_result['customer_name'],
+            "customer_billing_name" => $customer_result['customer_billing_name'],
+            "customer_address" =>  $customer_result['customer_address'],
+            "customer_mobile_no" =>  $customer_result['customer_mobile_no'],
+            "customer_whatsapp_no" =>  $customer_result['customer_whatsapp_no'],
+            "customer_date" =>  $customer_result['customer_date']
+          );
+        } 
+
+        $response_array = array(
+          'code' => HTTP_200,
+          'isSuccess' => true,
+          'message' => CUSTOMER_RECEIVED,
+          'customer_details' => $resultSet
+        );
+        $this->output
+        ->set_content_type('application/json')
+        ->set_status_header(HTTP_200)
+        ->set_output(json_encode($response_array));
+      }
+      else{
+        $response_array = array(
+          'code' => HTTP_201,
+          'isSuccess' => false,
+          'message' => NEED_SEARCH_RESULT,
+          'customer_details' => $resultSet
+        );
+        $this->output
+        ->set_content_type('application/json')
+        ->set_status_header(HTTP_201)
+        ->set_output(json_encode($response_array));
+      }
+    }
+  }
+  else{
+    $response_array = array(
+      'code' => HTTP_201,
+      'isSuccess' => false,
+      'message' => NEED_ALL_PARAMS,
+      'customer_details' => $resultSet
+    );
+    $this->output
+    ->set_content_type('application/json')
+    ->set_status_header(HTTP_201)
+    ->set_output(json_encode($response_array));
+  }
+
+}
 
 
 
