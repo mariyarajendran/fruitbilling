@@ -11,6 +11,8 @@ class CustomerModel extends CI_Model{
 
 
 
+
+
 	public function getProductDetails($data){
 		$this->db->select('*');
 		$this->db->from('customer_master');
@@ -41,12 +43,18 @@ class CustomerModel extends CI_Model{
 	}
 
 
-	public function updateProductDatas($id,$data){
-		$this->db
-		->where('product_id', $id)
-		->update('product_master', $data);
+
+	public function updateCustomerDatas($id,$data){
+		$this->db->set($data);
+		$this->db->where('customer_id', $id);
+		$this->db->update('customer_master');
 		if ($this->db->affected_rows() >= 0) {
-			return true;
+			$this->db->select('*');
+			$this->db->from('customer_master');
+			$this->db->where('customer_id',$id);
+			$query_result=$this->db->get();
+			return $query_result->result_array();
+			//return true;
 		}else{
 			return false;
 		}

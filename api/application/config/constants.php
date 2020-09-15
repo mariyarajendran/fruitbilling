@@ -101,6 +101,8 @@ define('ENTER_CUSTOMER_MOBILE_NO', 'Enter Customer mobile number');
 define('ENTER_CUSTOMER_WHATS_APP_NO', 'Enter Customer whatsapp number');
 define('WRONG_FOR_ADD_CUSTOMER', 'Something Wrong in Add Customer');
 define('NEW_CUSTOMER_ADDED', 'New Customer Added Successfully');
+define('CUSTOMER_UPDATED', 'Customer Updated');
+
 
 ////product
 define('ENTER_PRODUCT_CODE', 'Enter Product code');
@@ -111,9 +113,19 @@ define('WRONG_FOR_ADD_PRODUCT', 'Something Wrong in Add Product');
 define('NEW_PRODUCT_ADDED', 'New Product Added Successfully');
 define('PRODUCT_RECEIVED', 'Product Details Received Successfully');
 define('CUSTOMER_RECEIVED', 'Customer Details Received Successfully');
+define('PRODUCT_UPDATED', 'Product Details Updated Successfully');
 
 
 define('NEED_ALL_PARAMS', 'Please give all request params');
 define('NEED_PAGE_COUNT', 'Page Count must be not empty');
 define('NEED_SEARCH_RESULT', 'Searched result not found.');
+define('MISSING_CUSTOMER_ID', 'Missing Customer ID.');
+define('MISSING_PRODUCT_ID', 'Missing Product ID.');
+define('WRONG_FOR_UPDATE_PRODUCT','Something Wrong, while updating Datas');
+define('WRONG_FOR_UPDATE','Something Wrong, while updating Datas');
+
+/////order placed
+define('ORDER_PLACED','Order Placed Successfully');
+define('ORDER_FAILED','Failed to place order.');
+
 

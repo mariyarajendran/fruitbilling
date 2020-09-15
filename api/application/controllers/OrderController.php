@@ -12,12 +12,12 @@ class OrderController extends API_Controller{
 		$this->load->helper(array('form', 'url'));
 
 		
-		$this->_APIConfig([
-			'methods'                              => ['POST','GET'],
-			'requireAuthorization'                 => true,
-			'limit' => [100, 'ip', 'everyday'] ,
-			'data' => [ 'status_code' => HTTP_401 ],
-		]);
+		// $this->_APIConfig([
+		// 	'methods'                              => ['POST','GET'],
+		// 	'requireAuthorization'                 => true,
+		// 	'limit' => [100, 'ip', 'everyday'] ,
+		// 	'data' => [ 'status_code' => HTTP_401 ],
+		// ]);
 	}
 
 
@@ -28,65 +28,70 @@ class OrderController extends API_Controller{
 	}
 
 
+	public function postPurchaseDetailData($order_id,$data,$customer_id){
+		$product_list_data = Array();
+		foreach ($data['product_list_data'] as $product_result) 
+		{ 
+			$product_list_data[] = array(
+				"product_id" =>  $product_result['product_id'],
+				"customer_id" =>  $customer_id,
+				"order_id" =>  $order_id,
+				"product_name" =>  $product_result['product_name'],
+				"product_cost" =>  $product_result['product_cost'],
+				"product_date" =>  $product_result['product_date'],
+				"product_stock_kg" =>  $product_result['product_stock_kg'],
+				"product_code" =>  $product_result['product_code']
+			);
+		} 
+		return $product_list_data;
+	}
+
+	public function postOrderSummaryData($order_id,$data,$customer_id){
+		$order_summary_array = array(
+			'order_id' => $order_id,
+			'customer_id' => $customer_id,
+			'total_amount' => $data['total_amount'],
+			'received_amount' => $data['received_amount'],
+			'pending_amount' => $data['pending_amount']
+		);
+		return $order_summary_array;
+	}
+
 	public function placeOrder(){
 		$this->load->model('OrderModel');
 		$json_request_body = file_get_contents('php://input');
 		$data = json_decode($json_request_body, true);
+		$product_list_data = Array();
+		
+		if(isset($data['customer_id']) && isset($data['product_list_data']) && isset($data['total_amount']) && isset($data['received_amount']) && isset($data['pending_amount'])){
+			$customer_id=$data['customer_id'];
 
-		if(isset($data['user_id']) && isset($data['product_id']) && isset($data['cart_id'])){
-
-			$user_id=$data['user_id'];
-			$product_id=$data['product_id'];
-			$cart_id=$data['cart_id'];
-
-			if(empty($user_id)){
+			if(empty($customer_id)){
 				$response_array = array(
-					'status_code' => "0",
-					'status' => HTTP_400,
-					'message' => "User id missing",
+					'code' => HTTP_201,
+					'isSuccess' => false,
+					'message' => MISSING_CUSTOMER_ID,
 				);
 				$this->output
 				->set_content_type('application/json')
-				->set_status_header(HTTP_400)
+				->set_status_header(HTTP_201)
 				->set_output(json_encode($response_array));
 			}
-			else if(empty($product_id)){
-				$response_array = array(
-					'status_code' => "0",
-					'status' => HTTP_400,
-					'message' => "Product id missing",
-				);
-				$this->output
-				->set_content_type('application/json')
-				->set_status_header(HTTP_400)
-				->set_output(json_encode($response_array));
-			}
-			else if(empty($cart_id)){
-				$response_array = array(
-					'status_code' => "0",
-					'status' => HTTP_400,
-					'message' => "Product id missing",
-				);
-				$this->output
-				->set_content_type('application/json')
-				->set_status_header(HTTP_400)
-				->set_output(json_encode($response_array));
-			}else{
+			else{
+
 				$order_array = array(
-					'user_id' => $user_id,
-					'product_id' => $product_id,
-					'order_status' => "placed"  
+					'customer_id' => $customer_id
 				);
 
-				$result_query = $this->OrderModel->placeOrderModel($order_array);
+				$result_query = $this->OrderModel->placeOrderModel($order_array,$data,$customer_id);
 				if($result_query)
 				{
-					$result_query = $this->OrderModel->deleteToCartModel($cart_id);
 					$response_array = array(
-						'status_code' => "1",
-						'status' => HTTP_200,
-						'message' => "Order Placed Successfully"
+						'code' => HTTP_200,
+						'isSuccess' => true,
+						'message' => ORDER_PLACED,
 					);
+
 					$this->output
 					->set_content_type('application/json')
 					->set_status_header(HTTP_200)
@@ -94,13 +99,13 @@ class OrderController extends API_Controller{
 				}
 				else{
 					$response_array = array(
-						'status_code' => "0",
-						'status' => HTTP_400,
-						'message' => "Failed to place order."
+						'code' => HTTP_201,
+						'isSuccess' => false,
+						'message' => ORDER_FAILED,
 					);
 					$this->output
 					->set_content_type('application/json')
-					->set_status_header(HTTP_400)
+					->set_status_header(HTTP_201)
 					->set_output(json_encode($response_array));
 				}
 			}
@@ -109,95 +114,17 @@ class OrderController extends API_Controller{
 		}
 		else{
 			$response_array = array(
-				'status_code' => "0",
-				'status' => HTTP_400,
-				'message' => "Please give all request params",
-				'user_details' => array(
-					'user_id' => "",
-					'user_register_status' => "",
-					'user_mobile_number' => "",
-					'user_otp' => "",
-					'user_access_token' => ""
-				),
+				'code' => HTTP_201,
+				'isSuccess' => false,
+				'message' => ORDER_FAILED,
 			);
 			$this->output
 			->set_content_type('application/json')
-			->set_status_header(HTTP_400)
+			->set_status_header(HTTP_201)
 			->set_output(json_encode($response_array));
 		}
 	}
 
-
-
-
-	public function cancelOrder(){
-		$this->load->model('OrderModel');
-		$json_request_body = file_get_contents('php://input');
-		$data = json_decode($json_request_body, true);
-
-		if(isset($data['order_id'])){
-			$order_id = $data['order_id'];
-			if(empty($order_id)){
-				$response_array = array(
-					'status_code' => "0",
-					'status' => "fails",
-					'message' => "Order Id Missing.Unable to update user datas",
-				);
-				$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode($response_array));
-			}else{
-				$order_data = array(
-					'order_status' => "cancelled"
-				);
-				$result_query = $this->OrderModel->cancelOrderModel($order_id,$order_data);
-				if($result_query)
-				{
-					$response_array = array(
-						'status_code' => "1",
-						'status' => HTTP_200,
-						'message' => "Order Cancelled Successfully",
-					);
-					$this->output
-					->set_content_type('application/json')
-					->set_status_header(HTTP_200)
-					->set_output(json_encode($response_array));
-				}
-				else{
-					$response_array = array(
-						'status_code' => "0",
-						'status' => HTTP_400,
-						'message' => "Something Wrong, while Cancel Order",
-					);
-					$this->output
-					->set_content_type('application/json')
-					->set_status_header(HTTP_400)
-					->set_output(json_encode($response_array));
-				}
-
-
-			}
-		}else{
-			$response_array = array(
-				'status_code' => "0",
-				'status' => HTTP_400,
-				'message' => "Please give all request params",
-				'user_details' => array(
-					'user_id' => "",
-					'user_register_status' => "",
-					'user_mobile_number' => "",
-					'user_otp' => "",
-					'user_access_token' => ""
-				),
-			);
-			$this->output
-			->set_content_type('application/json')
-			->set_status_header(HTTP_400)
-			->set_output(json_encode($response_array));
-		}
-
-
-	}
 
 
 	public function orderHistoryDetails(){
@@ -274,7 +201,7 @@ class OrderController extends API_Controller{
 					->set_output(json_encode($response_array));
 				}
 
-				
+
 			}
 		}
 		else{

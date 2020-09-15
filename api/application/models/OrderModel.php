@@ -9,26 +9,37 @@ class OrderModel extends CI_Model{
 
 
 
-	public function placeOrderModel($data){
-		$insert = $this->db->insert('order_master',$data);
-		if($insert){
-			return $this->db->insert_id();
-		}
-		else{
+	public function placeOrderModel($orderData,$data,$customer_id){
+
+		$this->db->trans_begin();
+		////insert order table
+		$this->db->insert('order_master',$orderData);
+		//// get order id
+		$order_id=$this->db->insert_id();
+        //// send orderid return purchase details
+		$controllerInstance = & get_instance();
+		$controllerGetPurchaseDetails = $controllerInstance->postPurchaseDetailData($order_id,$data,$customer_id);
+		//// insert purchase details
+		$this->db->insert_batch('purchase_detail_master',$controllerGetPurchaseDetails);
+		///// get summary details
+		$controllerGetSummaryDetails = $controllerInstance->postOrderSummaryData($order_id,$data,$customer_id);
+        //// insert summary details
+		$this->db->insert('order_summary_master',$controllerGetSummaryDetails); 
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
 			return false;
 		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+
 	}
 
-	public function cancelOrderModel($id,$data){
-		$this->db
-		->where('order_id',$id)
-		->update('order_master',$data);
-		if ($this->db->affected_rows() >= 0) {
-			return true;
-		}else{
-			return false;
-		}
-	}
+
+
 
 	public function deleteToCartModel($id){
 		$this->db
