@@ -120,12 +120,26 @@ define('NEED_ALL_PARAMS', 'Please give all request params');
 define('NEED_PAGE_COUNT', 'Page Count must be not empty');
 define('NEED_SEARCH_RESULT', 'Searched result not found.');
 define('MISSING_CUSTOMER_ID', 'Missing Customer ID.');
+define('MISSING_ORDER_ID', 'Missing Order ID.');
 define('MISSING_PRODUCT_ID', 'Missing Product ID.');
+define('MISSING_ORDER_SUMMARY_ID', 'Missing Order Summary ID.');
 define('WRONG_FOR_UPDATE_PRODUCT','Something Wrong, while updating Datas');
 define('WRONG_FOR_UPDATE','Something Wrong, while updating Datas');
 
 /////order placed
 define('ORDER_PLACED','Order Placed Successfully');
 define('ORDER_FAILED','Failed to place order.');
+define('BALANCE_RECEIVED', 'Balance Details Received Successfully');
+define('PENDING_BALANCE_UPDATED','Pending Balance Updated Successfully.');
+define('PENDING_BALANCE_UPDATE_FAILED','Pending Balance Failed to Update.');
 
+
+////dashboard deatils
+define('DASHBOARD_DEATILS_RECEIVED','Dashboard Details Received Successfully');
+define('DASHBOARD_DEATILS_RECEIVED_FAILED','Dashboard Details Failed to Received');
+
+////reports
+define('OVER_ALL_REPORT', 'Overall Report Received Successfully');
+define('ORDER_DETAILS_REPORT', 'Order Details Received Successfully');
+define('REPORT_NOT_FOUND', 'Report Details not found');
 

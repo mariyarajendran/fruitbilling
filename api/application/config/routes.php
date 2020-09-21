@@ -63,7 +63,7 @@ $route['json/updateUserDetails'] = 'ProfileController/updateAllUserProfileDetail
 ///profile Area
 
 //product Area
-$route['json/getAllProducts'] = 'ProductController/getAllProducts';
+
 //product Area
 
 //cart Area
@@ -79,8 +79,7 @@ $route['json/orderHistory'] = 'OrderController/orderHistoryDetails';
 //order Area
 
 //admin add product
-$route['json/addNewProduct'] = 'AdminAddProductController/adminAddProductDatas';
-$route['json/updateProduct'] = 'AdminAddProductController/updateProductDetails';
+
 $route['json/deleteproduct'] = 'AdminAddProductController/adminDeleteProduct';
 $route['json/adminUpdateProductStatus'] = 'AdminAddProductController/confirmAndCloseOrder';
 //admin add product
@@ -89,16 +88,30 @@ $route['json/adminUpdateProductStatus'] = 'AdminAddProductController/confirmAndC
 $route['json/pushNotification'] = 'PushNotificationController/pushNotification';
 //pushNotification Area
 
-$route['json/demoapi'] = 'CredentialController/demoapi';
-$route['json/demoapilogin'] = 'CredentialController/demoapilogin';
-$route['json/demoapiview'] = 'CredentialController/demoapiview';
-$route['json/upload'] = 'CredentialController/do_upload';
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
+///products
+$route['json/addNewProduct'] = 'product/AdminAddProductController/adminAddProductDatas';
+$route['json/updateProduct'] = 'product/AdminAddProductController/updateProductDetails';
+$route['json/getAllProducts'] = 'product/ProductController/getAllProducts';
+
+
 ///customer 
-$route['json/addNewCustomer'] = 'CustomerController/addCustomerData';
-$route['json/updateCustomer'] = 'CustomerController/updateCustomerDetails';
-$route['json/getAllCustomer'] = 'CustomerController/getAllCustomerData';
+$route['json/addNewCustomer'] = 'customer/CustomerController/addCustomerData';
+$route['json/updateCustomer'] = 'customer/CustomerController/updateCustomerDetails';
+$route['json/getAllCustomer'] = 'customer/CustomerController/getAllCustomerData';
+
+//billing history
+$route['json/getPendingBalance'] = 'billing/PendingBalanceController/getPendingBalance';
+$route['json/updatePendingBalance'] = 'billing/PendingBalanceController/updatePendingBalance';
+
+///dashboard
+$route['json/getDashboardDetails'] = 'dashboard/DashboardController/getDashboardDetails';
+
+//reports
+$route['json/getOverAllOrderReports'] = 'reports/OverAllReportController/getOverAllOrderReports';
+$route['json/getOverAllOrderDetailedReports'] = 'reports/OverAllReportController/getOverAllOrderDetailedReports';
