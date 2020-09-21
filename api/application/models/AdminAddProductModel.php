@@ -29,10 +29,10 @@ class AdminAddProductModel extends CI_Model{
 	} 
 
 
-	public function deleteProductModel($id){
-		$this->db
-		->where('product_id', $id)
-		->delete('product_master');
+	public function deleteProductModel($id,$data){
+		$this->db->set($data);
+		$this->db->where('product_id', $id);
+		$this->db->update('product_master');
 		if ($this->db->affected_rows() >= 0) {
 			return true;
 		}else{
@@ -42,11 +42,16 @@ class AdminAddProductModel extends CI_Model{
 
 
 	public function updateProductDatas($id,$data){
-		$this->db
-		->where('product_id', $id)
-		->update('product_master', $data);
+		$this->db->set($data);
+		$this->db->where('product_id', $id);
+		$this->db->update('product_master');
 		if ($this->db->affected_rows() >= 0) {
-			return true;
+			$this->db->select('*');
+			$this->db->from('product_master');
+			$this->db->where('product_id',$id);
+			$query_result=$this->db->get();
+			return $query_result->result_array();
+			//return true;
 		}else{
 			return false;
 		}
