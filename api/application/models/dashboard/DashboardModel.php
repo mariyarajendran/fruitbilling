@@ -1,4 +1,3 @@
-
 <?php
 
 if (!defined('BASEPATH'))
@@ -22,8 +21,8 @@ class DashboardModel extends CI_Model {
     public function getTotalIncome($from_date, $to_date) {
         $this->db->select_sum('received_amount');
         $this->db->from('order_summary_master');
-        $this->db->where('order_summary_master.order_summary_date >=', $from_date);
-        $this->db->where('order_summary_master.order_summary_date <=', $to_date);
+        $this->db->where('DATE(order_summary_master.order_summary_date) >=', $from_date);
+        $this->db->where('DATE(order_summary_master.order_summary_date) <=', $to_date);
         $query_result = $this->db->get();
         $result = $query_result->row();
         return $result->received_amount;
@@ -32,8 +31,8 @@ class DashboardModel extends CI_Model {
     public function getPendingBalance($from_date, $to_date) {
         $this->db->select_sum('pending_amount');
         $this->db->from('order_summary_master');
-        $this->db->where('order_summary_master.order_summary_date >=', $from_date);
-        $this->db->where('order_summary_master.order_summary_date <=', $to_date);
+        $this->db->where('DATE(order_summary_master.order_summary_date) >=', $from_date);
+        $this->db->where('DATE(order_summary_master.order_summary_date) <=', $to_date);
         $query_result = $this->db->get();
         $result = $query_result->row();
         return $result->pending_amount;
@@ -42,8 +41,8 @@ class DashboardModel extends CI_Model {
     public function getOverAllAmount($from_date, $to_date) {
         $this->db->select_sum('total_amount');
         $this->db->from('order_summary_master');
-        $this->db->where('order_summary_master.order_summary_date >=', $from_date);
-        $this->db->where('order_summary_master.order_summary_date <=', $to_date);
+        $this->db->where('DATE(order_summary_master.order_summary_date) >=', $from_date);
+        $this->db->where('DATE(order_summary_master.order_summary_date) <=', $to_date);
         $query_result = $this->db->get();
         $result = $query_result->row();
         return $result->total_amount;
