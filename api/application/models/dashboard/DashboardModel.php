@@ -11,11 +11,11 @@ class DashboardModel extends CI_Model {
     }
 
     public function getCustomerCount() {
-        return $this->db->count_all_results('customer_master');
+        return $this->db->where(['customer_status' => 'true'])->from("customer_master")->count_all_results();
     }
 
     public function getProductCount() {
-        return $this->db->count_all_results('product_master');
+        return $this->db->where(['product_status' => 'true'])->from("product_master")->count_all_results();
     }
 
     public function getTotalIncome($from_date, $to_date) {

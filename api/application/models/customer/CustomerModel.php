@@ -86,6 +86,7 @@ class CustomerModel extends CI_Model {
         $this->db->order_by('customer_name');
         $this->db->like('customer_name', $data, 'after');
         $this->db->limit($pagelimits, $pagecount);
+        $this->db->where('customer_status', 'true');
         $query_result = $this->db->get();
         return $query_result->result_array();
     }
