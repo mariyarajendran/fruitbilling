@@ -159,6 +159,7 @@ class OverAllReportController extends API_Controller {
                             "product_name" => $order_result['product_name'],
                             "product_cost" => $order_result['product_cost'],
                             "product_stock_kg" => $order_result['product_stock_kg'],
+                            "product_total_cost" => $order_result['product_total_cost'],
                             "product_code" => $order_result['product_code'],
                             "product_date" => $order_result['product_date'],
                             "purchase_detail_date" => $order_result['purchase_detail_date']
