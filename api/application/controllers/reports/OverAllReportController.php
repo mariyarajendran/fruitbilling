@@ -110,14 +110,37 @@ class OverAllReportController extends API_Controller {
         $json_request_body = file_get_contents('php://input');
         $data = json_decode($json_request_body, true);
         $resultSet = Array();
+        $result_customer_details = Array(
+            "customer_id" => 0,
+            "customer_name" => "",
+            "customer_billing_name" => "",
+            "customer_address" => "",
+            "customer_mobile_no" => "",
+            "customer_whatsapp_no" => "",
+            "customer_status" => false,
+            "customer_date" => "");
 
-        if (isset($data['order_id'])) {
+        if (isset($data['order_id']) && isset($data['customer_id'])) {
             $order_id = $data['order_id'];
+            $customer_id = $data['customer_id'];
             if ($order_id == '') {
                 $response_array = array(
                     'code' => HTTP_200,
                     'isSuccess' => false,
                     'message' => MISSING_ORDER_ID,
+                    'customer_details' => $result_customer_details,
+                    'overall_reports_details' => $resultSet
+                );
+                $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(HTTP_200)
+                        ->set_output(json_encode($response_array));
+            } else if ($customer_id == '') {
+                $response_array = array(
+                    'code' => HTTP_200,
+                    'isSuccess' => false,
+                    'message' => MISSING_CUSTOMER_ID,
+                    'customer_details' => $result_customer_details,
                     'overall_reports_details' => $resultSet
                 );
                 $this->output
@@ -142,10 +165,23 @@ class OverAllReportController extends API_Controller {
                         );
                     }
 
+                    $result_customers = $this->OverAllReportModel->getCustomerDetails($customer_id);
+                    if ($result_customers) {
+                        $result_customer_details = Array(
+                            "customer_id" => $result_customers->customer_id,
+                            "customer_name" => $result_customers->customer_name,
+                            "customer_billing_name" => $result_customers->customer_billing_name,
+                            "customer_address" => $result_customers->customer_address,
+                            "customer_mobile_no" => $result_customers->customer_mobile_no,
+                            "customer_whatsapp_no" => $result_customers->customer_whatsapp_no,
+                            "customer_status" => $result_customers->customer_status,
+                            "customer_date" => $result_customers->customer_date);
+                    }
                     $response_array = array(
                         'code' => HTTP_200,
                         'isSuccess' => true,
                         'message' => ORDER_DETAILS_REPORT,
+                        'customer_details' => $result_customer_details,
                         'overall_reports_details' => $resultSet
                     );
                     $this->output
@@ -157,6 +193,7 @@ class OverAllReportController extends API_Controller {
                         'code' => HTTP_200,
                         'isSuccess' => false,
                         'message' => REPORT_NOT_FOUND,
+                        'customer_details' => $result_customer_details,
                         'overall_reports_details' => $resultSet
                     );
                     $this->output
@@ -170,6 +207,7 @@ class OverAllReportController extends API_Controller {
                 'code' => HTTP_200,
                 'isSuccess' => false,
                 'message' => NEED_ALL_PARAMS,
+                'customer_details' => $result_customer_details,
                 'overall_reports_details' => $resultSet
             );
             $this->output

@@ -39,6 +39,15 @@ class OverAllReportModel extends CI_Model {
         return $query_result->result_array();
     }
 
+    public function getCustomerDetails($customer_id) {
+        $this->db->select('*');
+        $this->db->from('customer_master');
+        $this->db->where('customer_id', $customer_id);
+        $query_result = $this->db->get();
+        $result = $query_result->row();
+        return $result;
+    }
+
 }
 
 ?>

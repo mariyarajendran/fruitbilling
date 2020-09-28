@@ -285,7 +285,7 @@ class CustomerController extends API_Controller {
                 if ($result_query) {
                     foreach ($result_query as $customer_result) {
                         $resultSet[] = array(
-                            "customer_id " => $customer_result['customer_id'],
+                            "customer_id" => $customer_result['customer_id'],
                             "customer_name" => $customer_result['customer_name'],
                             "customer_billing_name" => $customer_result['customer_billing_name'],
                             "customer_address" => $customer_result['customer_address'],
