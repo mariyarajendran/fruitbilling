@@ -280,10 +280,15 @@ class CustomerController extends API_Controller {
             } else {
                 $page_count = ($page_count * $page_limits);
                 $result_query = $this->CustomerModel->getAllCustomerData($search_keyword, $page_count, $page_limits);
-                //print_r($result_query);
-
                 if ($result_query) {
                     foreach ($result_query as $customer_result) {
+                        $pending_income = (int) $this->CustomerModel->getTotalCustomerPendingBalance($customer_result['customer_id']);
+                        if($pending_income) {
+                            
+                        }else{
+                            $pending_income=0;
+                        }
+
                         $resultSet[] = array(
                             "customer_id" => $customer_result['customer_id'],
                             "customer_name" => $customer_result['customer_name'],
@@ -292,7 +297,8 @@ class CustomerController extends API_Controller {
                             "customer_mobile_no" => $customer_result['customer_mobile_no'],
                             "customer_whatsapp_no" => $customer_result['customer_whatsapp_no'],
                             "customer_status" => $customer_result['customer_status'],
-                            "customer_date" => $customer_result['customer_date']
+                            "customer_date" => $customer_result['customer_date'],
+                            "customer_total_pending_balance" => $pending_income
                         );
                     }
 

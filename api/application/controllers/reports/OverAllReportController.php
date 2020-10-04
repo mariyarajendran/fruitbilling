@@ -61,6 +61,8 @@ class OverAllReportController extends API_Controller {
                             "order_summary_id" => $order_result['order_summary_id'],
                             "order_id" => $order_result['order_id'],
                             "customer_id" => $order_result['customer_id'],
+                            "customer_name" => $order_result['customer_name'],
+                            "customer_mobile_no" => $order_result['customer_mobile_no'],
                             "total_amount" => (int) $order_result['total_amount'],
                             "received_amount" => $order_result['received_amount'],
                             "pending_amount" => (int) $order_result['pending_amount'],

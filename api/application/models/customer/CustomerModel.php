@@ -91,6 +91,15 @@ class CustomerModel extends CI_Model {
         return $query_result->result_array();
     }
 
+    public function getTotalCustomerPendingBalance($customer_id) {
+        $this->db->select_sum('pending_amount');
+        $this->db->from('order_summary_master');
+        $this->db->where('customer_id', $customer_id);
+        $query_result = $this->db->get();
+        $result = $query_result->row();
+        return $result->pending_amount;
+    }
+
 }
 
 ?>
