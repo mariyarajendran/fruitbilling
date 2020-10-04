@@ -107,6 +107,7 @@ $route['json/getAllCustomer'] = 'customer/CustomerController/getAllCustomerData'
 
 //billing history
 $route['json/getPendingBalance'] = 'billing/PendingBalanceController/getPendingBalance';
+$route['json/getPendingBalanceHistory'] = 'billing/PendingBalanceController/getPendingBalanceHistory';
 $route['json/updatePendingBalance'] = 'billing/PendingBalanceController/updatePendingBalance';
 
 ///dashboard

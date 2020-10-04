@@ -34,6 +34,10 @@ class PendingBalanceController extends API_Controller {
             $order_summary_id = $data['order_summary_id'];
             $pending_amount = $data['pending_amount'];
             $received_amount = $data['received_amount'];
+            $order_summary_pending_amount = $data['order_summary_pending_amount'];
+            $order_pending_history_received = $data['order_pending_history_received'];
+            $order_pending_history_pending = $data['order_pending_history_pending'];
+
 
 
             if (empty($order_summary_id)) {
@@ -51,7 +55,14 @@ class PendingBalanceController extends API_Controller {
                     'pending_amount' => $pending_amount,
                     'received_amount' => $received_amount
                 );
-                $result_query = $this->PendingBalanceModel->updatePendingBalance($order_summary_id, $order_summary_array);
+
+                $order_pending_history_array = array(
+                    'order_summary_id' => $order_summary_id,
+                    'order_summary_pending_amount' => $order_summary_pending_amount,
+                    'order_pending_history_received' => $order_pending_history_received,
+                    'order_pending_history_pending' => $order_pending_history_pending,
+                );
+                $result_query = $this->PendingBalanceModel->updatePendingBalance($order_summary_id, $order_summary_array, $order_pending_history_array);
 
                 if ($result_query) {
                     $response_array = array(
@@ -130,6 +141,79 @@ class PendingBalanceController extends API_Controller {
                             "received_amount" => $order_result['received_amount'],
                             "pending_amount" => (int) $order_result['pending_amount'],
                             "order_summary_date" => $order_result['order_summary_date']
+                        );
+                    }
+
+                    $response_array = array(
+                        'code' => HTTP_200,
+                        'isSuccess' => true,
+                        'message' => BALANCE_RECEIVED,
+                        'balance_details' => $resultSet
+                    );
+                    $this->output
+                            ->set_content_type('application/json')
+                            ->set_status_header(HTTP_200)
+                            ->set_output(json_encode($response_array));
+                } else {
+                    $response_array = array(
+                        'code' => HTTP_200,
+                        'isSuccess' => false,
+                        'message' => NEED_SEARCH_RESULT,
+                        'balance_details' => $resultSet
+                    );
+                    $this->output
+                            ->set_content_type('application/json')
+                            ->set_status_header(HTTP_200)
+                            ->set_output(json_encode($response_array));
+                }
+            }
+        } else {
+            $response_array = array(
+                'code' => HTTP_200,
+                'isSuccess' => false,
+                'message' => NEED_ALL_PARAMS,
+                'balance_details' => $resultSet
+            );
+            $this->output
+                    ->set_content_type('application/json')
+                    ->set_status_header(HTTP_200)
+                    ->set_output(json_encode($response_array));
+        }
+    }
+
+    public function getPendingBalanceHistory() {
+        $this->load->model('billing/PendingBalanceModel');
+        $json_request_body = file_get_contents('php://input');
+        $data = json_decode($json_request_body, true);
+        $resultSet = Array();
+
+        if (isset($data['order_summary_id'])) {
+
+            $order_summary_id = $data['order_summary_id'];
+
+            if (empty($order_summary_id)) {
+                $response_array = array(
+                    'code' => HTTP_200,
+                    'isSuccess' => false,
+                    'message' => MISSING_ORDER_SUMMARY_ID,
+                    'balance_details' => $resultSet
+                );
+                $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(HTTP_200)
+                        ->set_output(json_encode($response_array));
+            } else {
+                $result_query = $this->PendingBalanceModel->getPendingBalanceHistory($order_summary_id);
+                if ($result_query) {
+                    foreach ($result_query as $order_result) {
+                        $resultSet[] = array(
+                            "order_summary_id" => $order_result['order_summary_id'],
+                            "order_id" => $order_result['order_id'],
+                            "customer_id" => $order_result['customer_id'],
+                            "order_summary_pending_amount" => $order_result['order_summary_pending_amount'],
+                            "order_pending_history_received" => (int) $order_result['order_pending_history_received'],
+                            "order_pending_history_pending" => $order_result['order_pending_history_pending'],
+                            "order_pending_history_date" => $order_result['order_pending_history_date']
                         );
                     }
 
