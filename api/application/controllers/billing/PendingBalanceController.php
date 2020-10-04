@@ -126,7 +126,7 @@ class PendingBalanceController extends API_Controller {
                         ->set_output(json_encode($response_array));
             } else {
                 $page_count = ($page_count * $page_limits);
-                $result_query = $this->PendingBalanceModel->getPendingBalanceDetails($search_keyword, $page_count, $page_limits, $customer_id, $from_date, $to_date);
+                $result_query = $this->PendingBalanceModel->getPendingBalanceDetails($search_keyword, $from_date, $to_date);
                 //print_r($result_query);
 
                 if ($result_query) {

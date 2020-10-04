@@ -10,7 +10,7 @@ class PendingBalanceModel extends CI_Model {
         $this->load->database();
     }
 
-    public function getPendingBalanceDetails($searchkeyword, $pagecount, $pagelimits, $customerid, $from_date, $to_date) {
+    public function getPendingBalanceDetails($searchkeyword, $from_date, $to_date) {
         $this->db->select('*');
         $this->db->from('order_summary_master');
         $this->db->join('customer_master', 'customer_master.customer_id = order_summary_master.customer_id');
@@ -26,7 +26,7 @@ class PendingBalanceModel extends CI_Model {
         //$this->db->where('order_summary_master.order_summary_date <=', $to_date);
         $this->db->where('order_summary_master.pending_amount >', '0');
         //$this->db->limit($pagelimits, $pagecount);
-        $this->db->where('order_summary_master.customer_id', $customerid);
+        //$this->db->where('order_summary_master.customer_id', $customerid);
         $query_result = $this->db->get();
         return $query_result->result_array();
     }
