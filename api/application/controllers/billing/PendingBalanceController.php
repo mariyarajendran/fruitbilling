@@ -105,19 +105,33 @@ class PendingBalanceController extends API_Controller {
         $data = json_decode($json_request_body, true);
         $resultSet = Array();
 
-        if (isset($data['search_keyword']) && isset($data['page_count']) && isset($data['page_limits']) && isset($data['customer_id']) && isset($data['from_date']) && isset($data['to_date'])) {
+        if (isset($data['search_keyword']) && isset($data['from_date']) && isset($data['to_date'])) {
             $search_keyword = $data['search_keyword'];
-            $page_count = $data['page_count'];
-            $page_limits = $data['page_limits'];
-            $customer_id = $data['customer_id'];
             $from_date = $data['from_date'];
             $to_date = $data['to_date'];
 
-            if ($page_count == '') {
+
+            $result_query = $this->PendingBalanceModel->getPendingBalanceDetails($search_keyword, $from_date, $to_date);
+
+            if ($result_query) {
+                foreach ($result_query as $order_result) {
+                    $resultSet[] = array(
+                        "order_summary_id" => $order_result['order_summary_id'],
+                        "order_id" => $order_result['order_id'],
+                        "customer_id" => $order_result['customer_id'],
+                        "customer_name" => $order_result['customer_name'],
+                        "customer_mobile_no" => $order_result['customer_mobile_no'],
+                        "total_amount" => (int) $order_result['total_amount'],
+                        "received_amount" => $order_result['received_amount'],
+                        "pending_amount" => (int) $order_result['pending_amount'],
+                        "order_summary_date" => $order_result['order_summary_date']
+                    );
+                }
+
                 $response_array = array(
                     'code' => HTTP_200,
-                    'isSuccess' => false,
-                    'message' => NEED_PAGE_COUNT,
+                    'isSuccess' => true,
+                    'message' => BALANCE_RECEIVED,
                     'balance_details' => $resultSet
                 );
                 $this->output
@@ -125,47 +139,16 @@ class PendingBalanceController extends API_Controller {
                         ->set_status_header(HTTP_200)
                         ->set_output(json_encode($response_array));
             } else {
-                $page_count = ($page_count * $page_limits);
-                $result_query = $this->PendingBalanceModel->getPendingBalanceDetails($search_keyword, $from_date, $to_date);
-                //print_r($result_query);
-
-                if ($result_query) {
-                    foreach ($result_query as $order_result) {
-                        $resultSet[] = array(
-                            "order_summary_id" => $order_result['order_summary_id'],
-                            "order_id" => $order_result['order_id'],
-                            "customer_id" => $order_result['customer_id'],
-                            "customer_name" => $order_result['customer_name'],
-                            "customer_mobile_no" => $order_result['customer_mobile_no'],
-                            "total_amount" => (int) $order_result['total_amount'],
-                            "received_amount" => $order_result['received_amount'],
-                            "pending_amount" => (int) $order_result['pending_amount'],
-                            "order_summary_date" => $order_result['order_summary_date']
-                        );
-                    }
-
-                    $response_array = array(
-                        'code' => HTTP_200,
-                        'isSuccess' => true,
-                        'message' => BALANCE_RECEIVED,
-                        'balance_details' => $resultSet
-                    );
-                    $this->output
-                            ->set_content_type('application/json')
-                            ->set_status_header(HTTP_200)
-                            ->set_output(json_encode($response_array));
-                } else {
-                    $response_array = array(
-                        'code' => HTTP_200,
-                        'isSuccess' => false,
-                        'message' => NEED_SEARCH_RESULT,
-                        'balance_details' => $resultSet
-                    );
-                    $this->output
-                            ->set_content_type('application/json')
-                            ->set_status_header(HTTP_200)
-                            ->set_output(json_encode($response_array));
-                }
+                $response_array = array(
+                    'code' => HTTP_200,
+                    'isSuccess' => false,
+                    'message' => NEED_SEARCH_RESULT,
+                    'balance_details' => $resultSet
+                );
+                $this->output
+                        ->set_content_type('application/json')
+                        ->set_status_header(HTTP_200)
+                        ->set_output(json_encode($response_array));
             }
         } else {
             $response_array = array(
