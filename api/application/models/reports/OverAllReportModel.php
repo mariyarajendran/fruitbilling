@@ -24,7 +24,7 @@ class OverAllReportModel extends CI_Model {
         $this->db->order_by("order_summary_date", "DESC");
         $this->db->where('DATE(order_summary_master.order_summary_date) >=', $from_date);
         $this->db->where('DATE(order_summary_master.order_summary_date) <=', $to_date);
-        $this->db->limit($pagelimits, $pagecount);
+        //$this->db->limit($pagelimits, $pagecount);
         if ($event_id == 1) {
             $this->db->where('order_summary_master.customer_id', $customerid);
         }
