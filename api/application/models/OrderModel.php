@@ -25,6 +25,11 @@ class OrderModel extends CI_Model{
 		$controllerGetSummaryDetails = $controllerInstance->postOrderSummaryData($order_id,$data,$customer_id);
         //// insert summary details
 		$this->db->insert('order_summary_master',$controllerGetSummaryDetails); 
+		$order_summary_id=$this->db->insert_id();
+		$controllerPostPendingHistory = $controllerInstance->postPendingHistoryData($order_summary_id,$data);
+		$this->db->insert('order_pending_history_master',$controllerPostPendingHistory); 
+
+		
 		if ($this->db->trans_status() === FALSE)
 		{
 			$this->db->trans_rollback();

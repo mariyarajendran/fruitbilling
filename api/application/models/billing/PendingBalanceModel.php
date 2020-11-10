@@ -1,5 +1,6 @@
 <?php
 
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -21,10 +22,10 @@ class PendingBalanceModel extends CI_Model {
         $this->db->or_like('received_amount', $searchkeyword);
         $this->db->or_like('pending_amount', $searchkeyword);
         $this->db->group_end();
-        $this->db->order_by("DATE(order_summary_date)", "DESC");
         //$this->db->where('order_summary_master.order_summary_date >=', $from_date);
         //$this->db->where('order_summary_master.order_summary_date <=', $to_date);
         $this->db->where('order_summary_master.pending_amount >', '0');
+        $this->db->order_by("DATE(order_summary_date)", "DESC");
         //$this->db->limit($pagelimits, $pagecount);
         //$this->db->where('order_summary_master.customer_id', $customerid);
         $query_result = $this->db->get();
@@ -35,8 +36,8 @@ class PendingBalanceModel extends CI_Model {
         $this->db->select('*');
         $this->db->from('order_pending_history_master');
         $this->db->join('order_summary_master', 'order_summary_master.order_summary_id = order_pending_history_master.order_summary_id');
-        $this->db->order_by("DATE(order_pending_history_date)", "DESC");
         $this->db->where('order_pending_history_master.order_summary_id', $order_summary_id);
+        $this->db->order_by("DATE(order_pending_history_date)", "DESC");
         $query_result = $this->db->get();
         return $query_result->result_array();
     }
