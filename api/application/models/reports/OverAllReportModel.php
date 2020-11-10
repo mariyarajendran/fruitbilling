@@ -27,7 +27,7 @@ class OverAllReportModel extends CI_Model {
         if ($event_id == 1) {
             $this->db->where('order_summary_master.customer_id', $customerid);
         }
-        $this->db->order_by("DATE(order_summary_master.order_summary_date)", "DESC");
+        $this->db->order_by("DATE(order_summary_master.order_summary_date)", "ASC");
         $query_result = $this->db->get();
         return $query_result->result_array();
     }
