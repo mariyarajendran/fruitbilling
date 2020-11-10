@@ -37,7 +37,7 @@ class PendingBalanceModel extends CI_Model {
         $this->db->from('order_pending_history_master');
         $this->db->join('order_summary_master', 'order_summary_master.order_summary_id = order_pending_history_master.order_summary_id');
         $this->db->where('order_pending_history_master.order_summary_id', $order_summary_id);
-        $this->db->order_by("DATE(order_pending_history_date)", "DESC");
+        //$this->db->order_by("DATE(order_pending_history_date)", "DESC");
         $query_result = $this->db->get();
         return $query_result->result_array();
     }
