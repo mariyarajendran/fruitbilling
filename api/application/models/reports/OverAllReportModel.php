@@ -21,13 +21,13 @@ class OverAllReportModel extends CI_Model {
         $this->db->or_like('received_amount', $searchkeyword);
         $this->db->or_like('pending_amount', $searchkeyword);
         $this->db->group_end();
-        $this->db->order_by("order_summary_date", "DESC");
         $this->db->where('DATE(order_summary_master.order_summary_date) >=', $from_date);
         $this->db->where('DATE(order_summary_master.order_summary_date) <=', $to_date);
         //$this->db->limit($pagelimits, $pagecount);
         if ($event_id == 1) {
             $this->db->where('order_summary_master.customer_id', $customerid);
         }
+        $this->db->order_by("DATE(order_summary_date)", "DESC");
         $query_result = $this->db->get();
         return $query_result->result_array();
     }

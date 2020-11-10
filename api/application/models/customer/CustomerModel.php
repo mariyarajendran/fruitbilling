@@ -13,8 +13,8 @@ class CustomerModel extends CI_Model {
     public function getProductDetails($data) {
         $this->db->select('*');
         $this->db->from('customer_master');
-        $this->db->order_by('customer_name');
         $this->db->where($data);
+        $this->db->order_by('customer_name');
         $query_result = $this->db->get();
         return $query_result->result_array();
     }
