@@ -22,8 +22,8 @@ class PendingBalanceModel extends CI_Model {
         $this->db->or_like('received_amount', $searchkeyword);
         $this->db->or_like('pending_amount', $searchkeyword);
         $this->db->group_end();
-        //$this->db->where('order_summary_master.order_summary_date >=', $from_date);
-        //$this->db->where('order_summary_master.order_summary_date <=', $to_date);
+        $this->db->where('order_summary_master.order_summary_date >=', $from_date);
+        $this->db->where('order_summary_master.order_summary_date <=', $to_date);
         $this->db->where('order_summary_master.pending_amount >', '0');
         $this->db->order_by("DATE(order_summary_master.order_summary_date)", "DESC");
         //$this->db->limit($pagelimits, $pagecount);
