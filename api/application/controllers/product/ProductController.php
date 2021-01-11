@@ -60,6 +60,7 @@ class ProductController extends API_Controller {
                             "product_stock_kg" => (int) $product_result['product_stock_kg'],
                             "product_code" => $product_result['product_code'],
                             "product_status" => $product_result['product_status'],
+                            "product_previous_balance_flag" => $product_result['product_previous_balance_flag'],
                             "product_date" => $product_result['product_date']
                         );
                     }

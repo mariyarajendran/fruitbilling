@@ -94,7 +94,7 @@ class AdminAddProductController extends API_Controller {
                             'product_stock_kg' => $result_query[0]['product_stock_kg'],
                             'product_date' => $result_query[0]['product_date'],
                             'product_code' => $result_query[0]['product_code'],
-                            'product_status' => $result_query[0]['product_status'] == 'true' ? true : false),
+                            'product_status' => $result_query[0]['product_status'] == '1' ? true : false),
                     );
                     $this->output
                     ->set_content_type('application/json')
