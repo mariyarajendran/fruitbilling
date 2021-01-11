@@ -168,8 +168,8 @@ class AdminAddProductController extends API_Controller {
                     'product_cost' => $product_cost,
                     'product_stock_kg' => $product_stock_kg,
                     'product_code' => $product_code,
+                    'product_status' => $product_status,
                     'product_previous_balance_flag' => $product_previous_balance_flag,
-                    'product_status' => $product_status
                 );
 
                 $result_query = $this->AdminAddProductModel->updateProductDatas($product_id, array_filter($product_data));
