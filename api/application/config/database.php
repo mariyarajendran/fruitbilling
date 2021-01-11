@@ -76,15 +76,13 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-
-	'username' => 'root',  //eecshopp_tomato
-	'password' => '',    //jh@WtmL9P,x=
-	'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
-        // 'username' => 'cabelsof_cabelsoft', //eecshopp_tomato
-        // 'password' => 'Passw0rd55.,', //jh@WtmL9P,x=
-        // 'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
-    
-        'dbdriver' => 'mysqli',
+	// 'username' => 'root',  //eecshopp_tomato
+	// 'password' => '',    //jh@WtmL9P,x=
+	// 'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
+    'username' => 'cabelsof_cabelsoft', //eecshopp_tomato
+    'password' => 'Passw0rd55.,', //jh@WtmL9P,x=
+    'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
