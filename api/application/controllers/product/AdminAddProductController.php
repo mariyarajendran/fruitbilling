@@ -77,7 +77,8 @@ class AdminAddProductController extends API_Controller {
                     'product_cost' => $product_cost,
                     'product_stock_kg' => $product_stock_kg,
                     'product_code' => $product_code,
-                    'product_status' => "true"
+                    'product_status' => "true",
+                    'product_previous_balance_flag' => $product_previous_balance_flag
                 );
 
                 $result_query = $this->AdminAddProductModel->addProductModel($product_array);
@@ -93,8 +94,7 @@ class AdminAddProductController extends API_Controller {
                             'product_stock_kg' => $result_query[0]['product_stock_kg'],
                             'product_date' => $result_query[0]['product_date'],
                             'product_code' => $result_query[0]['product_code'],
-                            'product_status' => $result_query[0]['product_status'] == 'true' ? true : false,
-                            'product_previous_balance_flag' => $result_query[0]['product_previous_balance_flag'] == 'true' ? true : false),
+                            'product_status' => $result_query[0]['product_status'] == 'true' ? true : false),
                     );
                     $this->output
                     ->set_content_type('application/json')
