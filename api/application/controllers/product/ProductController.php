@@ -43,9 +43,9 @@ class ProductController extends API_Controller {
                     'product_details' => $resultSet
                 );
                 $this->output
-                        ->set_content_type('application/json')
-                        ->set_status_header(HTTP_200)
-                        ->set_output(json_encode($response_array));
+                ->set_content_type('application/json')
+                ->set_status_header(HTTP_200)
+                ->set_output(json_encode($response_array));
             } else {
                 $page_count = ($page_count * $page_limits);
                 $result_query = $this->ProductModel->getAllProductDetails($search_keyword, $page_count, $page_limits);
@@ -60,7 +60,7 @@ class ProductController extends API_Controller {
                             "product_stock_kg" => (int) $product_result['product_stock_kg'],
                             "product_code" => $product_result['product_code'],
                             "product_status" => $product_result['product_status'],
-                            "product_previous_balance_flag" => $product_result['product_previous_balance_flag'],
+                            'product_previous_balance_flag' => $product_result['product_previous_balance_flag'] == '1' ? true : false,
                             "product_date" => $product_result['product_date']
                         );
                     }
@@ -72,9 +72,9 @@ class ProductController extends API_Controller {
                         'product_details' => $resultSet
                     );
                     $this->output
-                            ->set_content_type('application/json')
-                            ->set_status_header(HTTP_200)
-                            ->set_output(json_encode($response_array));
+                    ->set_content_type('application/json')
+                    ->set_status_header(HTTP_200)
+                    ->set_output(json_encode($response_array));
                 } else {
                     $response_array = array(
                         'code' => HTTP_200,
@@ -83,9 +83,9 @@ class ProductController extends API_Controller {
                         'product_details' => $resultSet
                     );
                     $this->output
-                            ->set_content_type('application/json')
-                            ->set_status_header(HTTP_200)
-                            ->set_output(json_encode($response_array));
+                    ->set_content_type('application/json')
+                    ->set_status_header(HTTP_200)
+                    ->set_output(json_encode($response_array));
                 }
             }
         } else {
@@ -96,9 +96,9 @@ class ProductController extends API_Controller {
                 'product_details' => $resultSet
             );
             $this->output
-                    ->set_content_type('application/json')
-                    ->set_status_header(HTTP_200)
-                    ->set_output(json_encode($response_array));
+            ->set_content_type('application/json')
+            ->set_status_header(HTTP_200)
+            ->set_output(json_encode($response_array));
         }
     }
 
