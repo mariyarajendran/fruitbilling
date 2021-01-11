@@ -115,6 +115,8 @@ $route['json/getDashboardDetails'] = 'dashboard/DashboardController/getDashboard
 
 //reports
 $route['json/getOverAllOrderReports'] = 'reports/OverAllReportController/getOverAllOrderReports';
+$route['json/triggerMail'] = 'reports/OverAllReportController/triggerMailFun';
+$route['json/loadViewSample'] = 'reports/OverAllReportController/loadViewSample';
 $route['json/getOverAllOrderDetailedReports'] = 'reports/OverAllReportController/getOverAllOrderDetailedReports';
 
 
