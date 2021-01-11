@@ -82,6 +82,7 @@ $db['default'] = array(
     'username' => 'cabelsof_cabelsoft', //eecshopp_tomato
     'password' => 'Passw0rd55.,', //jh@WtmL9P,x=
     'database' => 'cabelsof_fruitbilling', //eecshopp_tomato
+   
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

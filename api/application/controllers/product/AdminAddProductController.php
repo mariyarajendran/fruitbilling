@@ -137,7 +137,8 @@ class AdminAddProductController extends API_Controller {
             'product_stock_kg' => "",
             'product_date' => "",
             'product_code' => "",
-            'product_status' => false);
+            'product_status' => false,
+            'product_previous_balance_flag' => false);
 
         if (isset($data['product_id']) && isset($data['product_name']) && isset($data['product_cost']) && isset($data['product_stock_kg']) && isset($data['product_code']) && isset($data['product_status'])) {
 
@@ -147,7 +148,7 @@ class AdminAddProductController extends API_Controller {
             $product_stock_kg = $data['product_stock_kg'];
             $product_code = $data['product_code'];
             $product_status = $data['product_status'];
-
+            $product_previous_balance_flag = $data['product_previous_balance_flag'];
 
             if (empty($product_id)) {
                 $response_array = array(
@@ -167,6 +168,7 @@ class AdminAddProductController extends API_Controller {
                     'product_cost' => $product_cost,
                     'product_stock_kg' => $product_stock_kg,
                     'product_code' => $product_code,
+                    'product_previous_balance_flag' => $product_previous_balance_flag,
                     'product_status' => $product_status
                 );
 
