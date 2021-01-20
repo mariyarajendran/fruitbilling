@@ -57,6 +57,7 @@ class ProductController extends API_Controller {
                             "product_id" => $product_result['product_id'],
                             "product_name" => $product_result['product_name'],
                             "product_cost" => (int) $product_result['product_cost'],
+                            "box_cost" => (int) $product_result['box_cost'],
                             "product_stock_kg" => (int) $product_result['product_stock_kg'],
                             "product_code" => $product_result['product_code'],
                             "product_status" => $product_result['product_status'],

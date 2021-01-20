@@ -236,6 +236,7 @@ public function getOverAllOrderDetailedReports() {
             "product_id" => $order_result['product_id'],
             "product_name" => $order_result['product_name'],
             "product_cost" => $order_result['product_cost'],
+            "purchase_box_flag" => $order_result['purchase_box_flag']  == 'true' ? true : false,
             "product_stock_kg" => $order_result['product_stock_kg'],
             "product_total_cost" => $order_result['product_total_cost'],
             "product_code" => $order_result['product_code'],

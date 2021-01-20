@@ -33,6 +33,7 @@ class OrderController extends API_Controller {
                 "order_id" => $order_id,
                 "product_name" => $product_result['product_name'],
                 "product_cost" => $product_result['product_cost'],
+                "purchase_box_flag" => $product_result['purchase_box_flag'],
                 "product_date" => $product_result['product_date'],
                 "product_stock_kg" => $product_result['product_stock_kg'],
                 "product_total_cost" => $product_result['product_total_cost'],
