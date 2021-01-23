@@ -138,6 +138,7 @@ class AdminAddProductController extends API_Controller {
         $product_details = array('product_id ' => "",
             'product_name' => "",
             'product_cost' => "",
+            'box_cost' => "",
             'product_stock_kg' => "",
             'product_date' => "",
             'product_code' => "",
@@ -149,6 +150,7 @@ class AdminAddProductController extends API_Controller {
             $product_id = $data['product_id'];
             $product_name = $data['product_name'];
             $product_cost = $data['product_cost'];
+            $box_cost = $data['box_cost'];
             $product_stock_kg = $data['product_stock_kg'];
             $product_code = $data['product_code'];
             $product_status = $data['product_status'];
@@ -170,6 +172,7 @@ class AdminAddProductController extends API_Controller {
                 $product_data = array(
                     'product_name' => $product_name,
                     'product_cost' => $product_cost,
+                    'box_cost' => $box_cost,
                     'product_stock_kg' => $product_stock_kg,
                     'product_code' => $product_code,
                     'product_status' => $product_status,
@@ -185,6 +188,7 @@ class AdminAddProductController extends API_Controller {
                         'product_details' => array('product_id ' => $result_query[0]['product_id'],
                             'product_name' => $result_query[0]['product_name'],
                             'product_cost' => $result_query[0]['product_cost'],
+                            'box_cost' => $result_query[0]['box_cost'],
                             'product_stock_kg' => $result_query[0]['product_stock_kg'],
                             'product_date' => $result_query[0]['product_date'],
                             'product_code' => $result_query[0]['product_code'],
