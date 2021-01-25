@@ -138,9 +138,9 @@
 							</td> -->
 
 							<?php
-							echo "<td>".$customer->customer_billing_name."<br>";
-							echo $customer->customer_address."<br>";
-							echo $customer->customer_mobile_no."<br>";
+							echo "<td>".'Customer Name:'."<br>".$customer->customer_billing_name."<br>";
+							echo 'Address:'."<br>".$customer->customer_address."<br>";
+							echo 'Mobile No:'."<br>".$customer->customer_mobile_no."<br>";
 							echo "</td>";
 							?> 
 
@@ -195,5 +195,56 @@
 
 		</table>
 	</div>
+
+
+
+
+
+
+	<div class="invoice-box" id="content">
+		<table cellpadding="0" cellspacing="0">
+
+			<tr class="heading">
+				<td>
+					Previous
+				</td>
+
+				<td>
+					Received
+				</td>
+				
+				<td>
+					Pending
+				</td>
+				<td>
+					Date
+				</td>
+			</tr>
+
+
+			<?php
+			//$total=0;
+			foreach($pending_reports as $row)
+			{
+				echo "<tr class='item'>";
+				echo "<td>".'₹'.$row['order_summary_pending_amount']."</td>";
+				echo "<td>".'₹'.(int)$row['order_pending_history_received']."</td>";
+				echo "<td>".'₹'.$row['order_pending_history_pending']."</td>";
+				echo "<td>".$row['order_pending_history_date']."</td>";
+				echo "</tr>";
+				//$total+= (int)$row['product_total_cost'];
+			}
+			echo "<tr class='total'>";
+			echo "<td>"."</td>";
+			echo "<td>"."</td>";
+			echo "<td>"."</td>";
+			echo "<td>"."</td>";
+			echo "</tr>";
+			?>
+
+		</table>
+	</div>
+
+
 </body>
 </html>

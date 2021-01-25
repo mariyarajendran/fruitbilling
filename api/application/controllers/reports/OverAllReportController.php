@@ -89,14 +89,21 @@ class OverAllReportController extends API_Controller {
 
 public function loadViewSample(){
   $this->load->model('reports/OverAllReportModel');
+  $this->load->model('billing/PendingBalanceModel');
+
   $orderId = $this->input->get('orderId'); 
   $customerId = $this->input->get('customerId'); 
+  $orderSummaryId = $this->input->get('orderSummaryId'); 
 
-  if(!empty($orderId) && !empty($customerId)){
+  if(!empty($orderId) && !empty($customerId) && !empty($orderSummaryId)){
     $result_query = $this->OverAllReportModel->getOverAllOrderReportsDetails($orderId);
     $result_customers = $this->OverAllReportModel->getCustomerDetails($customerId);
+    $result_pending_reports = $this->PendingBalanceModel->getPendingBalanceHistory($orderSummaryId);
+
     $data['utility_array'] = $result_query;
     $data['customer'] = $result_customers;
+    $data['pending_reports'] = $result_pending_reports;
+
     $this->load->view('demo',$data);
   }else{
     $this->load->view('bill_error');
