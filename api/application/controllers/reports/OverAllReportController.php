@@ -23,6 +23,7 @@ class OverAllReportController extends API_Controller {
 
   public function index() {
     $this->load->view('demo');
+    $this->load->view('bill_error');
     $this->load->library('database');
   }
 
@@ -88,13 +89,20 @@ class OverAllReportController extends API_Controller {
 
 public function loadViewSample(){
   $this->load->model('reports/OverAllReportModel');
-  $order_id='1';
-  $customer_id='2';
-  $result_query = $this->OverAllReportModel->getOverAllOrderReportsDetails($order_id);
-  $result_customers = $this->OverAllReportModel->getCustomerDetails($customer_id);
-  $data['utility_array'] = $result_query;
-  $data['customer'] = $result_customers;
-  $this->load->view('demo',$data);
+  $orderId = $this->input->get('orderId'); 
+  $customerId = $this->input->get('customerId'); 
+
+  if(!empty($orderId) && !empty($customerId)){
+    $result_query = $this->OverAllReportModel->getOverAllOrderReportsDetails($orderId);
+    $result_customers = $this->OverAllReportModel->getCustomerDetails($customerId);
+    $data['utility_array'] = $result_query;
+    $data['customer'] = $result_customers;
+    $this->load->view('demo',$data);
+  }else{
+    $this->load->view('bill_error');
+  }
+
+
 }
 
 

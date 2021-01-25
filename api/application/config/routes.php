@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 $route['demo'] = 'DemoController';
+
 ///credential Area
 $route['json/userLogin'] = 'CredentialController/userLogin';
 $route['json/userSignup'] = 'CredentialController/userSignup';
@@ -112,6 +113,7 @@ $route['json/updatePendingBalance'] = 'billing/PendingBalanceController/updatePe
 
 ///dashboard
 $route['json/getDashboardDetails'] = 'dashboard/DashboardController/getDashboardDetails';
+
 
 //reports
 $route['json/getOverAllOrderReports'] = 'reports/OverAllReportController/getOverAllOrderReports';

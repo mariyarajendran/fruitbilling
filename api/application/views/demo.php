@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>A simple, clean, and responsive HTML invoice template</title>
+	<title>Bill Sheet</title>
 
 	<style>
 
@@ -176,7 +176,11 @@
 				echo "<tr class='item'>";
 				echo "<td>".$row['product_name']."</td>";
 				echo "<td>".'₹'.(int)$row['product_cost']."</td>";
-				echo "<td>".$row['product_stock_kg'].'Kg'."</td>";
+				if($row['purchase_box_flag']){
+					echo "<td>".$row['product_stock_kg'].' Box'."</td>";
+				}else{
+					echo "<td>".$row['product_stock_kg'].' Kg'."</td>";
+				}
 				echo "<td>".'₹'.(int)$row['product_total_cost']."</td>";
 				echo "</tr>";
 				$total+= (int)$row['product_total_cost'];
@@ -190,7 +194,6 @@
 			?>
 
 		</table>
-		<button onclick="convert_HTML_To_PDF()" id="cmd">generate PDF</button>
 	</div>
 </body>
 </html>
