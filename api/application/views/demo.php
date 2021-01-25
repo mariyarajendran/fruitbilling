@@ -127,7 +127,7 @@
 		<table cellpadding="0" cellspacing="0">
 
 
-			<tr class="information">
+			<tr class="heading">
 				<td colspan="4">
 					<table>
 						<tr>
@@ -138,9 +138,9 @@
 							</td> -->
 
 							<?php
-							echo "<td>".'Customer Name:'."<br>".$customer->customer_billing_name."<br>";
-							echo 'Address:'."<br>".$customer->customer_address."<br>";
-							echo 'Mobile No:'."<br>".$customer->customer_mobile_no."<br>";
+							echo "<td>".'வாடிக்கையாளர் பெயர்'.": ".$customer->customer_billing_name."<br>";
+							echo 'முகவரி'.": ".$customer->customer_address."<br>";
+							echo 'அலைபேசி எண்'.": ".$customer->customer_mobile_no."<br>";
 							echo "</td>";
 							?> 
 
@@ -153,18 +153,18 @@
 
 			<tr class="heading">
 				<td>
-					Item
+					பொருள்
 				</td>
 
 				<td>
-					Price
+					விலை
 				</td>
 				
 				<td>
-					Kilogram
+					கிலோகிராம் / பெட்டி
 				</td>
 				<td>
-					Total
+					மொத்தம்
 				</td>
 			</tr>
 
@@ -177,9 +177,9 @@
 				echo "<td>".$row['product_name']."</td>";
 				echo "<td>".'₹'.(int)$row['product_cost']."</td>";
 				if($row['purchase_box_flag']){
-					echo "<td>".$row['product_stock_kg'].' Box'."</td>";
+					echo "<td>".$row['product_stock_kg'].' பெட்டி'."</td>";
 				}else{
-					echo "<td>".$row['product_stock_kg'].' Kg'."</td>";
+					echo "<td>".$row['product_stock_kg'].' கிலோ'."</td>";
 				}
 				echo "<td>".'₹'.(int)$row['product_total_cost']."</td>";
 				echo "</tr>";
@@ -189,7 +189,7 @@
 			echo "<td>"."</td>";
 			echo "<td>"."</td>";
 			echo "<td>"."</td>";
-			echo "<td>".'Total:'.'₹'.$total."</td>";
+			echo "<td>".'மொத்தம்:'.'₹'.$total."</td>";
 			echo "</tr>";
 			?>
 
@@ -206,18 +206,18 @@
 
 			<tr class="heading">
 				<td>
-					Previous
+					முந்தையது
 				</td>
 
 				<td>
-					Received
+					பெறப்பட்டது
 				</td>
 				
 				<td>
-					Pending
+					நிலுவையில் உள்ளது
 				</td>
 				<td>
-					Date
+					தேதி
 				</td>
 			</tr>
 
