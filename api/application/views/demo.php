@@ -125,20 +125,18 @@
 <body>
 	<div class="invoice-box" id="content">
 		<table cellpadding="0" cellspacing="0">
-
+			<p>
+				<script> document.write(new Date().toLocaleDateString()); </script>
+			</p>
 
 			<tr class="heading">
 				<td colspan="4">
 					<table>
+						
 						<tr>
-		<!-- 					<td>
-								Sparksuite, Inc.<br>
-								12345 Sunny Road<br>
-								Sunnyville, CA 12345
-							</td> -->
-
 							<?php
-							echo "<td>".'வாடிக்கையாளர் பெயர்'.": ".$customer->customer_billing_name."<br>";
+							echo "<td>".'ஆர்டர் ஐடி'.": ".'#'.$orderId."<br>";
+							echo 'வாடிக்கையாளர் பெயர்'.": ".$customer->customer_billing_name."<br>";
 							echo 'முகவரி'.": ".$customer->customer_address."<br>";
 							echo 'அலைபேசி எண்'.": ".$customer->customer_mobile_no."<br>";
 							echo "</td>";

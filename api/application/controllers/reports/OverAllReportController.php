@@ -100,6 +100,7 @@ public function loadViewSample(){
     $result_customers = $this->OverAllReportModel->getCustomerDetails($customerId);
     $result_pending_reports = $this->PendingBalanceModel->getPendingBalanceHistory($orderSummaryId);
 
+    $data['orderId'] = $orderId;
     $data['utility_array'] = $result_query;
     $data['customer'] = $result_customers;
     $data['pending_reports'] = $result_pending_reports;
